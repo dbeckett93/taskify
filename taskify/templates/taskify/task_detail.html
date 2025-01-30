@@ -1,0 +1,43 @@
+{% extends 'taskify/base.html' %} {% block content %}
+<div class="row">
+  <div class="col-md-8 offset-md-2">
+    <div class="card">
+      <div
+        class="card-header d-flex justify-content-between align-items-center"
+      >
+        <h2 class="mb-0">{{ task.title }}</h2>
+        <span
+          class="badge {% if task.completed %}bg-success{% else %}bg-warning{% endif %}"
+        >
+          {{ task.completed|yesno:"Completed,Pending" }}
+        </span>
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ task.description|linebreaks }}</p>
+        <ul class="list-unstyled">
+          <li><strong>Priority:</strong> {{ task.get_priority_display }}</li>
+          <li>
+            <strong>Due Date:</strong> {{ task.due_date|default:"No due date
+            set" }}
+          </li>
+          <li><strong>Created:</strong> {{ task.created_date }}</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'task_edit' pk=task.pk %}" class="btn btn-warning"
+          >Edit</a
+        >
+        <a
+          href="{% url 'task_delete' pk=task.pk %}"
+          class="btn btn-danger"
+          onclick="return confirm('Are you sure you want to delete this task?')"
+          >Delete</a
+        >
+        <a href="{% url 'task_list' %}" class="btn btn-secondary"
+          >Back to List</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
