@@ -32,7 +32,7 @@ class Task(models.Model):
         blank=True
     )
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
-    attachment = models.FileField(upload_to='attachments/', null=True, blank=True)  # Add this line
+    attachment = models.FileField(upload_to='attachments/', null=True, blank=True)
 
     class Meta:
         app_label = 'taskify'
