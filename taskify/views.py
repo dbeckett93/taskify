@@ -39,7 +39,21 @@ def task_create(request):
 @login_required
 def task_detail(request, pk):
     task = get_object_or_404(Task, pk=pk)
-    return render(request, 'taskify/task_detail.html', {'task': task})
+    comments = task.comments.all()
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.task = task
+            comment.save()
+            return redirect('task_detail', pk=task.pk)
+    else:
+        comment_form = CommentForm()
+    return render(request, 'taskify/task_detail.html', {
+        'task': task,
+        'comments': comments,
+        'comment_form': comment_form
+    })
 
 @login_required
 def task_edit(request, pk):
