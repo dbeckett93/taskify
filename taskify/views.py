@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
-from .models import Task
-from .forms import TaskForm
+from .models import Task, Category, Comment
+from .forms import TaskForm, CommentForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 
@@ -13,7 +13,7 @@ def task_list(request):
 @login_required
 def task_create(request):
     if request.method == "POST":
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST, request.FILES)
         if form.is_valid():
             task = form.save()
             return redirect('task_list')
@@ -30,7 +30,7 @@ def task_detail(request, pk):
 def task_edit(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if request.method == "POST":
-        form = TaskForm(request.POST, instance=task)
+        form = TaskForm(request.POST, request.FILES, instance=task)
         if form.is_valid():
             task = form.save()
             return redirect('task_detail', pk=task.pk)

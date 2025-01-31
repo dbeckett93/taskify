@@ -1,4 +1,8 @@
-{% extends 'taskify/base.html' %} {% block content %}
+{% extends 'taskify/base.html' %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
 <div class="row">
   <div class="col-md-8 offset-md-2">
     <div class="card">
@@ -16,7 +20,11 @@
             <strong>Due Date:</strong> {{ task.due_date|default:"No due date set" }}
           </li>
           <li><strong>Created:</strong> {{ task.created_date }}</li>
+          <li><strong>Category:</strong> {{ task.category.name }}</li>
         </ul>
+        {% if task.attachment %}
+        <p><strong>Attachment:</strong> <a href="{{ task.attachment.url }}">Download</a></p>
+        {% endif %}
       </div>
       <div class="card-footer">
         <a href="{% url 'task_edit' pk=task.pk %}" class="btn btn-warning">Edit</a>
@@ -29,6 +37,20 @@
         <a href="{% url 'task_list' %}" class="btn btn-secondary">Back to List</a>
       </div>
     </div>
+
+    <h3 class="mt-4">Comments</h3>
+    <ul class="list-unstyled">
+      {% for comment in comments %}
+      <li>{{ comment.text }} - {{ comment.created_at }}</li>
+      {% endfor %}
+    </ul>
+
+    <h4>Add a comment</h4>
+    <form method="post">
+      {% csrf_token %}
+      {{ comment_form.as_p }}
+      <button type="submit" class="btn btn-primary">Add Comment</button>
+    </form>
   </div>
 </div>
 {% endblock %}

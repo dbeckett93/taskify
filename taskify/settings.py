@@ -131,4 +131,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'task_list'
+#Login_URL instead of LOGIN_REDIRECT_URL fixed issue of app not displaying in browser
 LOGIN_URL = 'login'
