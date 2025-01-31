@@ -15,7 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.contrib.auth import views as auth_views
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -26,4 +27,8 @@ urlpatterns = [
     path('task/<int:pk>/edit/', views.task_edit, name='task_edit'),
     path('task/<int:pk>/delete/', views.task_delete, name='task_delete'),
     path('task/<int:pk>/toggle/', views.task_toggle_completion, name='task_toggle_completion'),
+    path('login/', auth_views.LoginView.as_view(template_name='taskify/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('register/', views.register, name='register'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
