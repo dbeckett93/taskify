@@ -7,7 +7,22 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def task_list(request):
+    query = request.GET.get('q')
+    category = request.GET.get('category')
+    priority = request.GET.get('priority')
+    completed = request.GET.get('completed')
+
     tasks = Task.objects.all()
+
+    if query:
+        tasks = tasks.filter(title__icontains=query)
+    if category:
+        tasks = tasks.filter(category__name=category)
+    if priority:
+        tasks = tasks.filter(priority=priority)
+    if completed:
+        tasks = tasks.filter(completed=completed == 'true')
+
     return render(request, 'taskify/task_list.html', {'tasks': tasks})
 
 @login_required
