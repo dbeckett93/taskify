@@ -23,7 +23,7 @@ def task_list(request):
     if completed:
         tasks = tasks.filter(completed=completed == 'true')
 
-    return render(request, 'taskify/task_list.html', {'tasks': tasks})
+    return render(request, 'task_list.html', {'tasks': tasks})
 
 @login_required
 def task_create(request):
@@ -34,7 +34,7 @@ def task_create(request):
             return redirect('task_list')
     else:
         form = TaskForm()
-    return render(request, 'taskify/task_form.html', {'form': form})
+    return render(request, 'task_form.html', {'form': form})
 
 @login_required
 def task_detail(request, pk):
@@ -49,7 +49,7 @@ def task_detail(request, pk):
             return redirect('task_detail', pk=task.pk)
     else:
         comment_form = CommentForm()
-    return render(request, 'taskify/task_detail.html', {'task': task, 'comments': comments, 'comment_form': comment_form})
+    return render(request, 'task_detail.html', {'task': task, 'comments': comments, 'comment_form': comment_form})
 
 @login_required
 def task_edit(request, pk):
@@ -61,7 +61,7 @@ def task_edit(request, pk):
             return redirect('task_detail', pk=task.pk)
     else:
         form = TaskForm(instance=task)
-    return render(request, 'taskify/task_form.html', {'form': form})
+    return render(request, 'task_form.html', {'form': form})
 
 @login_required
 def task_delete(request, pk):
@@ -84,4 +84,4 @@ def register(request):
             return redirect('login')
     else:
         form = UserCreationForm()
-    return render(request, 'taskify/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
