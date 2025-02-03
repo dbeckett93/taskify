@@ -9,6 +9,24 @@ Taskify is a simple task management application built with Django. It allows use
 - Mark tasks as complete/incomplete
 - Add comments to tasks
 
+## Design
+
+A simple interface design with light and dark mode:
+
+![Screenshot 2025-02-03 150935](https://github.com/user-attachments/assets/2a8ea86d-8393-4645-b58b-58d580cfda8d)
+
+![Task](https://github.com/user-attachments/assets/8542366e-e50d-4706-87a0-4e41ce9afe71)
+
+Colour pallette:
+
+![colours](https://github.com/user-attachments/assets/86053ca2-6b98-400b-be3b-9a4d986e691a)
+
+## Responsive Design:
+
+![responsive](https://github.com/user-attachments/assets/7340aa10-3d46-4917-b64c-7de753fd124a)
+
+
+
 ## Installation
 
 1. Clone the repository:
