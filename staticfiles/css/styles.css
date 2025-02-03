@@ -5,9 +5,18 @@ body {
     color: #333;
 }
 
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
 .navbar {
     margin-bottom: 20px;
     background-color: #343a40;
+}
+
+body.dark-mode .navbar {
+  background-color: #333333;
 }
 
 .navbar-brand, .nav-link {
@@ -87,6 +96,16 @@ body {
 .btn-secondary:hover {
     background-color: #5a6268;
     border-color: #545b62;
+}
+
+body.dark-mode .btn-outline-light {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+body.dark-mode .btn-outline-light:hover {
+  background-color: #ffffff;
+  color: #333333;
 }
 
 .form-control,
